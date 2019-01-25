@@ -2,9 +2,9 @@ pipeline{
     agent none
     stages{
         stage("Git SCM"){
-            steps{
+          
                 git credentialsId: 'dockerid', url: 'https://github.com/kowal20x7/FlaskApi-Jenkins-Docker.git'
-            }
+         
         }
         stage("Build"){
             agent {
