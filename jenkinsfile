@@ -1,54 +1,25 @@
-pipeline{
-    agent none
-    stages{
-        stage("Git SCM"){
-          
-                git credentialsId: 'dockerid', url: 'https://github.com/kowal20x7/FlaskApi-Jenkins-Docker.git'
-         
-        }
-        stage("Build"){
-            agent {
-                docker {
-                    image 'python:3.6-alpine' 
-                }
-            }
-            steps{
-                sh "python -m compileall ."
-            }
-            
-        }
-        stage("Test"){
-            agent {
-                docker {
-                    image 'qnib/pytest' 
-                }
-            }
-            steps{
-                sh "pytest app.py"
-                sh "pytest test.py"
-            }
-    
-        }
-        stage("Build Docker Image"){
-            steps{
-                sh "docker build -t kowal20x7/flaskapi:latest ."
-            }
-        }
-        stage ("Push dockerhub"){
-            steps{
-                withCredentials([string(credentialsId: 'dockerpassid', variable: 'password')]) {
-                    sh "docker login -u kowal20x7 -p ${password}"
-                }
-        
-                sh "docker push kowal20x7/flaskapi:latest"
-            }
-        }
-        
-        stage("Run Container"){
-            steps{
-                sh "docker run -d -p 5000:5000 --name flaskapi kowal20x7/flaskapi:latest"
-            }
-        }
+node{
+    stage("Git SCM"){
+        git credentialsId: 'dockerid', url: 'https://github.com/kowal20x7/FlaskApi-Jenkins-Docker.git'
     }
+    stage("Build"){
+        
+    }
+    stage("Test"){
+        
+    }
+    stage("Build Docker Image"){
+        sh "docker build -t kowal20x7/flaskapi:latest ."
+    }
+    stage ("Push dockerhub"){
+        withCredentials([string(credentialsId: 'dockerpassid', variable: 'password')]) {
+            sh "docker login -u kowal20x7 -p ${password}"
+        }
 
+        sh "docker push kowal20x7/flaskapi:latest"
+    }
+    
+    stage("Run Container"){
+        sh "docker run -d -p 5000:5000 --name flaskapi kowal20x7/flaskapi:latest"
+    }
 }
