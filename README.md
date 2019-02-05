@@ -2,25 +2,20 @@
  Docker image : kowal20x7/flaskapi
 
 Api:
-
-POST   /login    - to get jwt token
-
-GET    /posts
-
-POST   /posts    - {'title','content'}
-
-PUT    /post/{id}
-
-DELETE /post/{id}
-
-GET    /post/{id}
-
-GET    /users
-
-POST   /users    - to add new user {'username','password'}
-
-PUT    /user/{id}
-
-DELETE /user/{id}
-
-GET    /user/{id}
+<ul>
+ <li><b> /login</li></b>
+POST   /login    - to get jwt token<br>
+ <li><b>/posts</li></b>
+GET    /posts<br>
+POST   /posts    - {'title','content'}<br>
+<li> <b>/post</li></b>
+PUT    /post/{id}<br>
+DELETE /post/{id}<br>
+GET    /post/{id}<br>
+<li><b> /users</li></b>
+GET    /users<br>
+POST   /users    - to add new user {'username','password'}<br>
+<li><b>/user</li></b>
+PUT    /user/{id}<br>
+DELETE /user/{id}<br>
+GET    /user/{id}<br>
