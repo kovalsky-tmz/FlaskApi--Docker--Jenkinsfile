@@ -1,5 +1,6 @@
 # FlaskApi-Jenkins-Docker
- Docker image : kowal20x7/flaskapi
+ Docker image : kowal20x7/flaskapi<br>
+ Existing user: <b> Login:</b> test, <b>Password: </b> test
 
 <h2>Api</h2>
 
