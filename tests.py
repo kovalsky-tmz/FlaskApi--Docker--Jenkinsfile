@@ -7,13 +7,13 @@ from app import db,app
 
 class TestApi:
 
-	def test_toke(self):
+	def test_index(self):
 		with app.test_client() as client:
 			response=client.get('/')
 			print(response.data)
 			assert response.status_code==200
 
-	def test_post(self):
+	def test_token(self):
 		with app.test_client() as client:
 			usr='test'
 			pswrd='test'
