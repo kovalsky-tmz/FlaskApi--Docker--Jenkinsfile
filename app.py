@@ -4,7 +4,9 @@ from flask import Flask,jsonify,request,abort,render_template
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#  musi tu byc bo inaczej nie importuje
+
+#  importy tutaj, inaczej blad
+
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
@@ -19,6 +21,9 @@ from flask_jwt_extended import (
 	get_jwt_identity
 )
 jwt = JWTManager(app)
+app.config["JSONIFY_PRETTYPRINT_REGULAR"] = False
+app.config['SECRET_KEY'] = 'some-secret-string'
+app.config['JWT_SECRET_KEY'] = 'super-secret'
 
 # reszta importóww
 from models import User,Post
@@ -27,15 +32,10 @@ from serializers import UserSchema,PostSchema
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 
-app.config["JSONIFY_PRETTYPRINT_REGULAR"] = False
-app.config['SECRET_KEY'] = 'some-secret-string'
-app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
-
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
-
 
 #custom error
 # @app.errorhandler(404)
